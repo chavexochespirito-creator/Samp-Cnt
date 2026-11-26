@@ -7,7 +7,7 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setColor(0xed4245)
                 .setTitle('📖 LEIA AS REGRAS')
-                .setDescription('Você precisa ler as regras de denúncia.\n\n➡️ **Regras:** [Link Aqui]\n\nAo concordar, você declara que leu as regras.')
+                .setDescription('Você precisa ler as regras de denúncia.\n\n➡️ **Regras:** [LINK_AQUI]\n\nAo concordar, você declara que leu as regras.')
                 .setFooter({ text: 'Stars Games' });
 
             const row = new ActionRowBuilder().addComponents(
@@ -38,7 +38,7 @@ module.exports = {
             const orgDenunciante = interaction.fields.getTextInputValue('org_denunciante');
             const motivo = interaction.fields.getTextInputValue('motivo');
 
-            const channel = interaction.guild.channels.cache.get('ID_DO_CANAL_DENUNCIAS');
+            const channel = interaction.guild.channels.cache.get('1575560313573609522'); 
             const thread = await channel.threads.create({ name: `Denúncia - ${nome}`, autoArchiveDuration: 60, type: 11 });
             await thread.members.add(interaction.user.id);
 
@@ -63,7 +63,7 @@ module.exports = {
                 new ButtonBuilder().setCustomId(`status_padrao_${report._id}`).setLabel('Fora do Padrão').setEmoji('🚫').setStyle(ButtonStyle.Secondary),
             );
 
-            await thread.send({ content: `<@&ID_CARGO_STAFF>`, embeds: [embed], components: [staffRow] });
+            await thread.send({ content: `<@&1575562723067175042>`, embeds: [embed], components: [staffRow] });
             return interaction.reply({ content: `Aberta! Acesse: ${thread}`, ephemeral: true });
         }
 
