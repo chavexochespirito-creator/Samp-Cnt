@@ -1,8 +1,13 @@
 require('dotenv').config();
 const { Client, GatewayIntentBits, Collection, REST, Routes } = require('discord.js');
 const mongoose = require('mongoose');
+const express = require('express');
 const fs = require('fs');
 const path = require('path');
+
+const app = express();
+app.get('/', (req, res) => res.send('Bot is Online! 🚀'));
+app.listen(process.env.PORT || 3000);
 
 const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildMessages]
@@ -11,8 +16,8 @@ const client = new Client({
 client.commands = new Collection();
 
 mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log('✅ Banco de Dados Conectado!'))
-    .catch(err => console.error('❌ Erro Banco de Dados:', err));
+    .then(() => console.log('✅ MongoDB Conectado!'))
+    .catch(err => console.error('❌ Erro MongoDB:', err));
 
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
@@ -43,7 +48,7 @@ client.on('interactionCreate', async interaction => {
             await command.execute(interaction, client);
         } catch (error) {
             console.error(error);
-            await interaction.reply({ content: 'Erro ao executar comando!', ephemeral: true });
+            await interaction.reply({ content: 'Erro interno!', ephemeral: true });
         }
     } else {
         const eventHandler = require('./events/interactionCreate');
