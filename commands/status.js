@@ -7,18 +7,24 @@ module.exports = {
         .setDescription('Mostra o status do servidor'),
     async execute(interaction) {
         await interaction.deferReply();
-        const serverConfig = { ip: '151.242.227.85', port: 7777, name: 'BRASIL PLAY STARS' };
+        
+        const serverConfig = { 
+            ip: '51.38.205.167',
+            port: 15272,
+            name: 'BRASIL AETHER RPG'
+        };
+
         const query = new SAMPQuery();
         const info = await query.getServerInfo(serverConfig);
 
-        if (!info) return interaction.editReply('❌ Servidor Offline.');
+        if (!info) return interaction.editReply('❌ O servidor está offline.');
 
         const embed = new EmbedBuilder()
             .setColor(0x2ecc71)
             .setTitle(serverConfig.name)
             .setDescription('Conecte-se à cidade e comece a construir sua história.')
-            .setThumbnail('LINK_DA_SUA_LOGO') 
-            .setImage('LINK_DO_SEU_BANNER') 
+            .setThumbnail('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBwfz12NrXBb2G6ZXnN6ORk98hgvkQsLsStRCk_L5Tcw&s=10')
+            .setImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFTxDjRHRRnXdjj0K3nuFcex8ogJDLhydsx4HBdtSJ-w&s=10')
             .addFields(
                 { name: '👤 Jogadores', value: `\`${info.players}\``, inline: false },
                 { name: 'Status', value: `🟢 Online`, inline: false },
@@ -28,8 +34,8 @@ module.exports = {
             .setTimestamp();
 
         const buttons = new ActionRowBuilder().addComponents(
-            new ButtonBuilder().setLabel('BAIXAR MOBILE').setURL('https://seulink.com/mobile').setStyle(ButtonStyle.Link),
-            new ButtonBuilder().setLabel('BAIXAR PC').setURL('https://seulink.com/pc').setStyle(ButtonStyle.Link)
+            new ButtonBuilder().setLabel('BAIXAR MOBILE').setURL('https://LINK_MOBILE').setStyle(ButtonStyle.Link),
+            new ButtonBuilder().setLabel('BAIXAR PC').setURL('https://LINK_PC').setStyle(ButtonStyle.Link)
         );
 
         await interaction.editReply({ embeds: [embed], components: [buttons] });
