@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const ReportSchema = new mongoose.Schema({
     guildId: String,
     threadId: String,
@@ -8,5 +7,4 @@ const ReportSchema = new mongoose.Schema({
     status: { type: String, default: 'Em Análise' },
     reason: String
 });
-
 module.exports = mongoose.model('Report', ReportSchema);
